@@ -1,44 +1,43 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import styles from './SearchBar.module.css';
 
-export default function SearchBar({ onClick }) {
-    const [searchQuery, setSearhQuery] = useState('');
 
+export default function Searchbar ({onClick}) {
+    const [searchQuery, setSearchQuery] = useState('');
+    
     const handleChange = event => {
-        setSearhQuery(event.currentTarget.value.toLowerCase());
+        setSearchQuery(event.currentTarget.value.toLowerCase());
     };
 
     const handleSubmit = event => {
         event.preventDefault();
 
         if (searchQuery.trim() === '') {
-            alert('Enter your request, please');
+            alert('Enter your request, please!');
             return;
         }
         onClick(searchQuery);
+        
     }
 
-    return (
-        <header className={styles.searchbar}>
-            <form className={styles.searchForm} onSubmit={handleSubmit}>
-                <button type="submit" className={styles.searchForm_button}>
-                    <span className={styles.searchForm_button_label}>Search</span>
-                </button>
+        return (
+    <header className={styles.Searchbar}>
+                <form className={styles.SearchForm} onSubmit={handleSubmit}>
+                    <button type="submit" className={styles.SearchForm_button}>
+                        <span className={styles.SearchForm_button_label}>Search</span>
+            </button>
 
-                <input className={styles.searchForm_input}
+            <input
+                        className={styles.SearchForm_input}
                 type="text"
                 autoComplete="off"
                 autoFocus
                 placeholder="Search movies"
                 value={searchQuery}
-                onChange={handleChange} />
-            </form>
-        </header> 
+                onChange={handleChange}
+            />
+        </form>
+    </header>
     )
-};
-
-SearchBar.propTypes = {
-    query: PropTypes.string,
 
 };

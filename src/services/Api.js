@@ -23,3 +23,11 @@ export function fetchMovieSearch(query) {
     return fetchWithErrorHandl(`${BASE_URL}/search/movie?api_key=${KEY}&query=${query}&language=en-US&page=1&include_adult=false`);
     
 }
+
+export function fetchMovieCast(movieId) {
+    return fetchWithErrorHandl(`${BASE_URL}/movie/${movieId}/credits?api_key=${KEY}&language=en-US`);
+}
+
+export function fetchMovieReviews(movieId) {
+    return fetchWithErrorHandl(`${BASE_URL}/movie/${movieId}/reviews?api_key=${KEY}&language=en-US`);
+}
