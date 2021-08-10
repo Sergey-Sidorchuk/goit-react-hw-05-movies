@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Searchbar from '../components/SearchBar/SearchBar';
 import MoviesGallery from '../components/MoviesGallery/MoviesGallery';
 import { fetchMovieSearch } from '../services/Api';
 
 export default function MoviesPage() {
-    const [query, setQuery] = useState('');
+    const [, setSearchQuery] = useState('');
     const [movies, setMovies] = useState(null);
+    const location = useLocation();
+
+    const query = new URLSearchParams(location.search).get('query') ?? '';
     
 useEffect(() => {
         if (!query) {
@@ -18,12 +22,12 @@ useEffect(() => {
     },[query])
 
  const onClick = request => {
-        setQuery(request);
+        setSearchQuery(request);
 }
 
     return (
         <>
-            <Searchbar onClick={onClick} />
+            <Searchbar onSubmit={onClick} />
             
             {movies && <MoviesGallery movies={movies} />}
         </>
